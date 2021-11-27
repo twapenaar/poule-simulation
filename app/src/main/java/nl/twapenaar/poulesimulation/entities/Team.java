@@ -1,13 +1,17 @@
-package nl.twapenaar.poulesimulation;
+package nl.twapenaar.poulesimulation.entities;
 
-public abstract class Team {
-    protected String name;
-    protected int playedMatches = 0;
-    protected int points = 0;
-    protected int goalsMade = 0;
-    protected int goalsGotten = 0;
-    protected float strength = 1f;
+public class Team {
+    private String name;
+    private int playedMatches = 0;
+    private int points = 0;
+    private int goalsMade = 0;
+    private int goalsGotten = 0;
+    private float strength = 1f;
 
+    /**
+     * @param name|string
+     * @param strength|float a random float number between 0 and 1 to determine the teams strength
+     */
     public Team(String name, float strength) {
         this.name = name;
         this.strength = strength;
@@ -29,6 +33,10 @@ public abstract class Team {
         this.playedMatches = playedMatches;
     }
 
+    public void addPlayedMatches(int playedMatches) {
+        this.playedMatches += playedMatches;
+    }
+
     public int getPoints() {
         return points;
     }
@@ -41,15 +49,15 @@ public abstract class Team {
         return goalsMade;
     }
 
-    public void setGoalsMade(int goalsMade) {
-        this.goalsMade = goalsMade;
+    public void addGoalsMade(int goalsMade) {
+        this.goalsMade += goalsMade;
     }
 
     public int getGoalsGotten() {
         return goalsGotten;
     }
 
-    public void setGoalsGotten(int goalsGotten) {
-        this.goalsGotten = goalsGotten;
+    public void addGoalsGotten(int goalsGotten) {
+        this.goalsGotten += goalsGotten;
     }
 }
