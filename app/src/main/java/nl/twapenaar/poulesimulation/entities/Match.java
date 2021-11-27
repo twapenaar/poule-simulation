@@ -1,6 +1,8 @@
 package nl.twapenaar.poulesimulation.entities;
 
-public class Match {
+import java.io.Serializable;
+
+public class Match implements Serializable {
     private Team teamA;
     private Team teamB;
     private int goalsTeamA;
@@ -49,6 +51,15 @@ public class Match {
         if (finishedMatch){
             this.teamA.addPlayedMatches(1);
             this.teamB.addPlayedMatches(1);
+
+            if (goalsTeamA > goalsTeamB){
+                this.teamA.addPoints(3);
+            }else if (goalsTeamB > goalsTeamA){
+                this.teamB.addPoints(3);
+            }else {
+                this.teamA.addPoints(1);
+                this.teamB.addPoints(1);
+            }
         }
 
         /*this.goalsTeamA = goalsTeamA;

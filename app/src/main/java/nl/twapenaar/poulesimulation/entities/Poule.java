@@ -1,23 +1,29 @@
 package nl.twapenaar.poulesimulation.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import nl.twapenaar.poulesimulation.services.Utility;
 
-public class Poule {
-    private Collection<Team> teams;
+public class Poule  implements Serializable {
+    private List<Team> teams;
     private Collection<Match> matches;
     private boolean halfOfTheMatches = false;
 
     public Poule(Collection<Team> teams, boolean halfOfTheMatches) {
-        this.teams = teams;
+        this.teams = (List<Team>) teams;
         this.halfOfTheMatches = halfOfTheMatches;
     }
 
-    public ArrayList<Match> GenerateMatches(){
+    /**
+     * Generates who is against who
+     * if the boolean halfOfTheMatches is true the teams only have single match against each other
+     */
+    public void GenerateMatches(){
         ArrayList<Team> tempTeams = new ArrayList<>(teams); // clones the teams, because some languages point back to original array when you edit the array
         ArrayList<Match> matches = new ArrayList<>();
 
@@ -33,18 +39,21 @@ public class Poule {
             }
         }
 
-        return matches;
+        this.matches = matches;
     }
 
-    public Collection<Match> SimulateAllMatches(){
+    /**
+     *  Simulates all matches
+     *  using the Simulate one match function
+     */
+    public void SimulateAllMatches(){
         ArrayList<Match> playedMatches = new ArrayList<>();
 
         for (Match match: matches) {
             playedMatches.add(SimulateMatch(match));
         }
 
-        matches = playedMatches;
-        return matches;
+        this.matches = playedMatches;
     }
 
     /**
@@ -103,10 +112,26 @@ public class Poule {
         return match;
     }
 
+    /**
+     * calculates the bonus a team gets based on their strength
+     */
     private int calculateModifier(float strength) {
         int maxStat = 20;
         float teamStat = maxStat*strength;
 
         return Math.round(teamStat-10)/2;
+    }
+
+
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public Collection<Match> getMatches() {
+        return matches;
+    }
+
+    public boolean isHalfOfTheMatches() {
+        return halfOfTheMatches;
     }
 }

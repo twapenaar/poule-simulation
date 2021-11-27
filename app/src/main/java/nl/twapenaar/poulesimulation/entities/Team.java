@@ -1,6 +1,8 @@
 package nl.twapenaar.poulesimulation.entities;
 
-public class Team {
+import java.io.Serializable;
+
+public class Team implements Serializable {
     private String name;
     private int playedMatches = 0;
     private int points = 0;
@@ -43,6 +45,10 @@ public class Team {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public void addPoints(int points) {
+        this.points += points;
     }
 
     public int getGoalsMade() {
