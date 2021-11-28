@@ -3,6 +3,7 @@ package nl.twapenaar.poulesimulation.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -39,6 +40,7 @@ public class Poule  implements Serializable {
             }
         }
 
+        Collections.shuffle(matches);
         this.matches = matches;
     }
 
@@ -63,6 +65,7 @@ public class Poule  implements Serializable {
      * @return Match
      */
     public Match SimulateMatch(Match match){
+        int matchIndex = ((List<Match>)matches).indexOf(match);
         Team teamA = match.getTeamA();
         int teamAScore = 0;
         Team teamB = match.getTeamB();
@@ -109,6 +112,7 @@ public class Poule  implements Serializable {
 
         match.setScore(teamAScore, teamBScore);
 
+        ((List<Match>) matches).set(matchIndex, match);
         return match;
     }
 
