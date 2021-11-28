@@ -39,6 +39,9 @@ public class PouleActivity extends AppCompatActivity {
         generateMatchTable();
     }
 
+    /**
+     * on click button function to simulate all matches
+     */
     public void simulateMatches(View view){
         poule.SimulateAllMatches();
 
@@ -46,6 +49,9 @@ public class PouleActivity extends AppCompatActivity {
         generateMatchTable();
     }
 
+    /**
+     * on click button function to simulate the next match
+     */
     public void simulateMatch(View view){
         List<Match> matches = (List<Match>) poule.getMatches();
         if (matchIndex < matches.size()){
@@ -57,6 +63,9 @@ public class PouleActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * generates the table for the matches
+     */
     private void generateMatchTable() {
         TableLayout tableLayout = (TableLayout) findViewById(R.id.matchLayout);
 
@@ -91,6 +100,9 @@ public class PouleActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * generates the row for a match for the match table
+     */
     private TableRow generateMatchRow(Match match, TableRow.LayoutParams layoutParams, int rowIndex) {
         rowIndex *= 10;
 
@@ -111,6 +123,9 @@ public class PouleActivity extends AppCompatActivity {
         return matchRow;
     }
 
+    /**
+     * generates the teams stats table
+     */
     @SuppressLint("ResourceType")
     private void generateTeamsTable(){
         TableLayout tableLayout = (TableLayout) findViewById(R.id.teamScoreLayout);
@@ -132,27 +147,12 @@ public class PouleActivity extends AppCompatActivity {
         tr_head.addView(teamHeader);
 
         TextView gamesPlayedHeader = Utility.genericTextView(3, "GP", this);
-        /*gamesPlayedHeader.setId(3);
-        gamesPlayedHeader.setLayoutParams(layoutParams);
-        gamesPlayedHeader.setTextColor(Color.BLACK);
-        gamesPlayedHeader.setTextSize(14);
-        gamesPlayedHeader.setText("GP");*/
         tr_head.addView(gamesPlayedHeader);
 
         TextView pointsHeader = Utility.genericTextView(4, "P", this);
-        /*pointsHeader.setId(4);
-        pointsHeader.setLayoutParams(layoutParams);
-        pointsHeader.setTextColor(Color.BLACK);
-        pointsHeader.setTextSize(14);
-        pointsHeader.setText("P");*/
         tr_head.addView(pointsHeader);
 
         TextView goalDiffHeader = Utility.genericTextView(5, "GD", this);
-        /*goalDiffHeader.setId(5);
-        goalDiffHeader.setLayoutParams(layoutParams);
-        goalDiffHeader.setTextColor(Color.BLACK);
-        goalDiffHeader.setTextSize(14);
-        goalDiffHeader.setText("GD");*/
         tr_head.addView(goalDiffHeader);
 
         tableLayout.addView(tr_head);
@@ -174,6 +174,9 @@ public class PouleActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * generates the team row for the teams stat table
+     */
     private TableRow generateTeamRow(Team team, TableRow.LayoutParams layoutParams, int rowIndex){
         rowIndex *= 10;
         TableRow teamRow = new TableRow(this);
@@ -186,37 +189,16 @@ public class PouleActivity extends AppCompatActivity {
         int teamBackground = Color.argb(transparency, 124, 252, 0 );
 
         TextView teamNameText = Utility.genericTextView(rowIndex+1, team.getName(), this, teamBackground);
-        /*teamNameText.setId(rowIndex+1);
-        teamNameText.setLayoutParams(layoutParams);
-        teamNameText.setBackgroundColor(teamBackground);
-        teamNameText.setTextColor(Color.BLACK);
-        teamNameText.setTextSize(14);
-        teamNameText.setText(team.getName());*/
         teamRow.addView(teamNameText);
 
         TextView gamesPlayedText = Utility.genericTextView(rowIndex+2, team.getPlayedMatches()+"", this);
-        /*gamesPlayedText.setId(rowIndex+2);
-        gamesPlayedText.setLayoutParams(layoutParams);
-        gamesPlayedText.setTextColor(Color.BLACK);
-        gamesPlayedText.setTextSize(14);
-        gamesPlayedText.setText(team.getPlayedMatches()+"");*/
         teamRow.addView(gamesPlayedText);
 
         TextView pointsText = Utility.genericTextView(rowIndex+3, team.getPoints()+"", this);
-        /*pointsText.setId(rowIndex+3);
-        pointsText.setLayoutParams(layoutParams);
-        pointsText.setTextColor(Color.BLACK);
-        pointsText.setTextSize(14);
-        pointsText.setText(team.getPoints()+"");*/
         teamRow.addView(pointsText);
 
         String goalDiff = team.getGoalsMade() + " - " + team.getGoalsGotten();
         TextView goalDifferenceText = Utility.genericTextView(rowIndex+4, goalDiff, this);
-        /*goalDifferenceText.setId(rowIndex+4);
-        goalDifferenceText.setLayoutParams(layoutParams);
-        goalDifferenceText.setTextColor(Color.BLACK);
-        goalDifferenceText.setTextSize(14);
-        goalDifferenceText.setText(goalDiff);*/
         teamRow.addView(goalDifferenceText);
 
         return teamRow;

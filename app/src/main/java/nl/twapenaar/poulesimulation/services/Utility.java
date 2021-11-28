@@ -10,14 +10,15 @@ import android.widget.TextView;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Utility {
+    /**
+     * makes a console log with the same tag
+     */
     public static void Log(String logMsg){
         Log.d("PouleSimulation", logMsg);
     }
 
     /**
      * return a random value between 0 and your range
-     * @param highRange|int is inclusive
-     * @return int
      */
     public static int RandomInt(int highRange){
         return RandomInt(0, highRange);
@@ -25,15 +26,15 @@ public class Utility {
 
     /**
      * return a random value between given low value and given high value
-     * @param lowRange|int is inclusive
-     * @param highRange|int is inclusive
-     * @return int
      */
     public static int RandomInt(int lowRange, int highRange){
         return ThreadLocalRandom.current().nextInt(lowRange, highRange+1);
     }
 
 
+    /**
+     * generates a generic TextView
+     */
     public static TextView genericTextView(int id, String text, Context context){
         TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -49,7 +50,9 @@ public class Utility {
 
         return textview;
     }
-
+    /**
+     * generates a generic TextView with a background
+     */
     public static TextView genericTextView(int id, String text, Context context, int backgroundColor){
         TextView textView = genericTextView(id, text, context);
         textView.setBackgroundColor(backgroundColor);
